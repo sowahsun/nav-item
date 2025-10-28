@@ -267,7 +267,7 @@ function handleLogoError(event) {
 .engine-btn {
   border: none;
   background: none;
-  color: #ffffff;
+  color: #000000; /* 文字颜色改为深色 */
   font-size: .8rem ;
   padding: 2px 10px;
   border-radius: 4px;
@@ -275,14 +275,14 @@ function handleLogoError(event) {
   transition: color 0.2s, background 0.2s;
 }
 .engine-btn.active, .engine-btn:hover {
-  color: #399dff;
-  background: #ffffff1a;
+  color: #1976d2; /* 活跃颜色改为蓝色 */
+  background: #ffffff99; /* 浅色背景 */
 }
 
 .search-container {
   display: flex;
   align-items: center;
-  background: #b3b7b83b;
+  background: #ffffff80; /* 搜索框改为浅色半透明 */
   border-radius: 20px;
   padding: 0.3rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -298,12 +298,12 @@ function handleLogoError(event) {
   background: transparent;
   padding: .1rem .5rem;
   font-size: 1.2rem;
-  color: #ffffff;
+  color: #000000; /* 搜索框文字改为深色 */
   outline: none;
 }
 
 .search-input::placeholder {
-  color: #999;
+  color: #666; /* 搜索框占位符改为深灰色 */
 }
 
 .clear-btn {
@@ -319,7 +319,7 @@ function handleLogoError(event) {
 
 .search-btn {
   background: #e9e9eb00;
-  color: #ffffff;
+  color: #000000; /* 搜索按钮图标颜色改为深色 */
   border: none;
   border-radius: 50%;
   width: 40px;
@@ -329,16 +329,18 @@ function handleLogoError(event) {
   justify-content: center;
   cursor: pointer;
   transition: background 0.2s;
+  margin-right: 0.1rem;
 }
 
 .search-btn:hover {
   background: #3367d6;
+  color: #ffffff;
 }
 
 .home-container {
   min-height: 95vh;
-  /* === 修改为明亮、清爽的 CSS 渐变背景 (左下到右上) === */
-  background-image: linear-gradient(135deg, #9DD7E8 0%, #B8F5E9 100%);
+  /* === 修改为柔和的蓝紫色 CSS 渐变 (左上到右下) === */
+  background-image: linear-gradient(135deg, #c0d6f7 0%, #e0e6f7 100%);
   /* =================================================== */
   background-size: cover;
   background-position: center;
@@ -358,8 +360,8 @@ function handleLogoError(event) {
   left: 0;
   right: 0;
   bottom: 0;
-  /* 调整遮罩层颜色以匹配浅色背景 */
-  background: rgba(0, 0, 0, 0.1); 
+  /* 移除深色遮罩层，保持背景明亮 */
+  background: rgba(255, 255, 255, 0.0); 
   z-index: 1;
 }
 
@@ -461,7 +463,7 @@ function handleLogoError(event) {
   gap: 8px;
   background: none;
   border: none;
-  color: rgba(255, 255, 255, 0.8);
+  color: #4a4a4a; /* 友链按钮文字改为深色 */
   cursor: pointer;
   transition: all 0.3s ease;
   font-size: 14px;
@@ -489,7 +491,7 @@ function handleLogoError(event) {
 }
 
 .modal-content {
-  background: #8585859c;
+  background: #ffffffd6; /* 弹窗内容改为浅色 */
   border-radius: 16px;
   width: 55rem;
   height: 30rem;
@@ -507,7 +509,7 @@ function handleLogoError(event) {
   justify-content: space-between;
   padding: 10px 20px;
   border-bottom: 1px solid #e5e7eb;
-  background: #d3d6d8;
+  background: #f1f1f1; /* 弹窗头部背景改为浅色 */
 }
 
 .modal-header h3 {
@@ -558,19 +560,19 @@ function handleLogoError(event) {
   flex-direction: column;
   align-items: center;
   padding: 6px;
-  background: #cfd3d661;
+  background: #e3e8ee61; /* 友链卡片背景改为浅色 */
   border-radius: 15px;
   text-decoration: none;
   color: inherit;
   transition: all 0.2s ease;
-  border: 1px solid #cfd3d661;
+  border: 1px solid #e3e8ee61;
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
 
 .friend-link-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-  background: #ffffff8e;
+  background: #ffffffc0; /* 悬停时背景更亮 */
 }
 
 .friend-link-logo {
@@ -616,15 +618,13 @@ function handleLogoError(event) {
 }
 
 .copyright {
-  /* 调整版权文字颜色以适应明亮背景 */
-  color: rgba(0, 0, 0, 0.7); 
+  color: #4a4a4a; /* 版权文字改为深色 */
   font-size: 14px;
   margin: 0;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5); /* 调整阴影颜色 */
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5); 
 }
 .footer-link {
-  /* 调整链接颜色以适应明亮背景 */
-  color: #000000cc; 
+  color: #1976d2; /* 链接改为深色 */
   text-decoration: none;
   transition: color 0.2s;
 }
@@ -718,14 +718,14 @@ function handleLogoError(event) {
     gap: 8px;
     background: none;
     border: none;
-    color: rgba(255, 255, 255, 0.8);
+    color: #4a4a4a; /* 适应浅色背景 */
     cursor: pointer;
     transition: all 0.3s ease;
     font-size: 0.7rem;
     padding: 0;
   }
   .copyright {
-    color: rgba(0, 0, 0, 0.7); /* 适应浅色背景 */
+    color: #4a4a4a; /* 适应浅色背景 */
     font-size: 0.7rem;
     margin: 0;
     text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
