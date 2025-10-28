@@ -1,8 +1,9 @@
-name: Build and Push Docker Image
+name: Docker Image CI # 保持名称清晰
 
 on:
   push:
-    branches: [ main ]
+    branches: [ "master" ] # 推荐使用 master 或 main，与您的分支保持一致
+    # 保持路径过滤，只在相关文件变动时触发
     paths:
       - 'Dockerfile'
       - 'app.js'
@@ -10,36 +11,44 @@ on:
       - 'db.js'
       - 'web/**'
       - 'routes/**'
-  pull_request:
-    branches: [ main ]
-  workflow_dispatch:
+  # pull_request: # 暂时不需要 Pull Request 触发，简化流程
+  #   branches: [ main ]
+  workflow_dispatch: # 允许手动触发
 
 jobs:
-  build:
+  build_and_push: # 修改 job 名称以更清晰地表达目的
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
-
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      # --- 【新增】步骤：设置 QEMU 和 Buildx 支持多架构 ---
+      - name: Set up QEMU (Enable Multi-Arch)
+        uses: docker/setup-qemu-action@v3
+        
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      # --------------------------------------------------------
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.GITHUB_TOKEN }} # 使用内置 Token
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Build and push Docker image
+      - name: Build and push Multi-arch Docker image
         uses: docker/build-push-action@v5
         with:
           context: .
           push: true
+          # --- 【关键修改】添加 platforms 参数 ---
+          platforms: linux/amd64,linux/arm64 # 同时构建 AMD64 和 ARM64 两种架构
+          # ----------------------------------------
           tags: |
             ghcr.io/${{ github.repository_owner }}/nav-item:latest
           labels: |
