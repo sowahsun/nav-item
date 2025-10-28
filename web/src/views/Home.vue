@@ -39,13 +39,11 @@
       </div>
     </div>
     
-    <!-- 左侧广告条 -->
     <div v-if="leftAds.length" class="ad-space-fixed left-ad-fixed">
       <a v-for="ad in leftAds" :key="ad.id" :href="ad.url" target="_blank">
         <img :src="ad.img" alt="广告" />
       </a>
     </div>
-    <!-- 右侧广告条 -->
     <div v-if="rightAds.length" class="ad-space-fixed right-ad-fixed">
       <a v-for="ad in rightAds" :key="ad.id" :href="ad.url" target="_blank">
         <img :src="ad.img" alt="广告" />
@@ -67,7 +65,6 @@
       </div>
     </footer>
 
-    <!-- 友情链接弹窗 -->
     <div v-if="showFriendLinks" class="modal-overlay" @click="showFriendLinks = false">
       <div class="modal-content" @click.stop>
         <div class="modal-header">
@@ -256,7 +253,7 @@ function handleLogoError(event) {
   width: 100vw;
   z-index: 100;
   /* background: rgba(0,0,0,0.6); /* 可根据需要调整 */
-  /* backdrop-filter: blur(8px);  /*  毛玻璃效果 */
+  /* backdrop-filter: blur(8px);  /* 毛玻璃效果 */
 }
 
 .search-engine-select {
@@ -332,7 +329,6 @@ function handleLogoError(event) {
   justify-content: center;
   cursor: pointer;
   transition: background 0.2s;
-  margin-right: 0.1rem;
 }
 
 .search-btn:hover {
@@ -341,7 +337,9 @@ function handleLogoError(event) {
 
 .home-container {
   min-height: 95vh;
-  background-image: url('https://main.ssss.nyc.mn/background.webp');
+  /* === 修改为明亮、清爽的 CSS 渐变背景 (左下到右上) === */
+  background-image: linear-gradient(135deg, #9DD7E8 0%, #B8F5E9 100%);
+  /* =================================================== */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -360,7 +358,8 @@ function handleLogoError(event) {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.3);
+  /* 调整遮罩层颜色以匹配浅色背景 */
+  background: rgba(0, 0, 0, 0.1); 
   z-index: 1;
 }
 
@@ -418,7 +417,7 @@ function handleLogoError(event) {
   max-width: 90px;
   max-height: 160px;
   border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  box-shadow: 0 0 12px rgba(0,0,0,0.12);
   background: #fff;
   object-fit: contain;
   margin: 0 auto;
@@ -617,13 +616,15 @@ function handleLogoError(event) {
 }
 
 .copyright {
-  color: rgba(255, 255, 255, 0.8);
+  /* 调整版权文字颜色以适应明亮背景 */
+  color: rgba(0, 0, 0, 0.7); 
   font-size: 14px;
   margin: 0;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5); /* 调整阴影颜色 */
 }
 .footer-link {
-  color: #ffffffcc;
+  /* 调整链接颜色以适应明亮背景 */
+  color: #000000cc; 
   text-decoration: none;
   transition: color 0.2s;
 }
@@ -669,7 +670,7 @@ function handleLogoError(event) {
   width: 100%;
   max-width: 90px;
   max-height: 160px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  box-shadow: 0 0 12px rgba(0,0,0,0.12);
   background: #fff;
   margin: 0 auto;
 }
@@ -724,10 +725,10 @@ function handleLogoError(event) {
     padding: 0;
   }
   .copyright {
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(0, 0, 0, 0.7); /* 适应浅色背景 */
     font-size: 0.7rem;
     margin: 0;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
   }
   .footer-content {
     display: flex;
@@ -736,4 +737,4 @@ function handleLogoError(event) {
     gap: 20px;
   }
 }
-</style> 
+</style>
