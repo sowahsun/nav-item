@@ -1,14 +1,14 @@
 <template>
   <div class="home-container">
     <div class="menu-bar-fixed">
-      <MenuBar 
-        :menus="menus" 
-        :activeId="activeMenu?.id" 
+      <MenuBar
+        :menus="menus"
+        :activeId="activeMenu?.id"
         :activeSubMenuId="activeSubMenu?.id"
         @select="selectMenu"
       />
     </div>
-    
+
     <div class="search-section">
       <div class="search-box-wrapper">
         <div class="search-engine-select">
@@ -20,15 +20,15 @@
           </button>
         </div>
         <div class="search-container">
-          <input 
-            v-model="searchQuery" 
-            type="text" 
-            :placeholder="selectedEngine.placeholder" 
+          <input
+            v-model="searchQuery"
+            type="text"
+            :placeholder="selectedEngine.placeholder"
             class="search-input"
             @keyup.enter="handleSearch"
           />
           <button v-if="searchQuery" class="clear-btn" @click="clearSearch" aria-label="清空" title="clear">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"></path></svg>
           </button>
           <button @click="handleSearch" class="search-btn" title="search">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -38,7 +38,7 @@
         </div>
       </div>
     </div>
-    
+
     <div v-if="leftAds.length" class="ad-space-fixed left-ad-fixed">
       <a v-for="ad in leftAds" :key="ad.id" :href="ad.url" target="_blank">
         <img :src="ad.img" alt="广告" />
@@ -49,9 +49,9 @@
         <img :src="ad.img" alt="广告" />
       </a>
     </div>
-    
+
     <CardGrid :cards="filteredCards"/>
-    
+
     <footer class="footer">
       <div class="footer-content">
         <button @click="showFriendLinks = true" class="friend-link-btn">
@@ -77,17 +77,17 @@
         </div>
         <div class="modal-body">
           <div class="friend-links-grid">
-            <a 
-              v-for="friend in friendLinks" 
-              :key="friend.id" 
-              :href="friend.url" 
-              target="_blank" 
+            <a
+              v-for="friend in friendLinks"
+              :key="friend.id"
+              :href="friend.url"
+              target="_blank"
               class="friend-link-card"
             >
               <div class="friend-link-logo">
-                <img 
-                  v-if="friend.logo" 
-                  :src="friend.logo" 
+                <img
+                  v-if="friend.logo"
+                  :src="friend.logo"
                   :alt="friend.title"
                   @error="handleLogoError"
                 />
@@ -167,7 +167,7 @@ function clearSearch() {
 
 const filteredCards = computed(() => {
   if (!searchQuery.value) return cards.value;
-  return cards.value.filter(card => 
+  return cards.value.filter(card =>
     card.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
     card.url.toLowerCase().includes(searchQuery.value.toLowerCase())
   );
@@ -184,7 +184,7 @@ onMounted(async () => {
   const adRes = await getAds();
   leftAds.value = adRes.data.filter(ad => ad.position === 'left');
   rightAds.value = adRes.data.filter(ad => ad.position === 'right');
-  
+
   const friendRes = await getFriends();
   friendLinks.value = friendRes.data;
 });
@@ -252,8 +252,6 @@ function handleLogoError(event) {
   left: 0;
   width: 100vw;
   z-index: 100;
-  /* background: rgba(0,0,0,0.6); /* 可根据需要调整 */
-  /* backdrop-filter: blur(8px);  /* 毛玻璃效果 */
 }
 
 .search-engine-select {
@@ -273,16 +271,17 @@ function handleLogoError(event) {
   border-radius: 4px;
   cursor: pointer;
   transition: color 0.2s, background 0.2s;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
 }
 .engine-btn.active, .engine-btn:hover {
   color: #ffffff;
-  background: #ffffff3a;
+  background: #ffffff33;
 }
 
 .search-container {
   display: flex;
   align-items: center;
-  background: #ffffff3b;
+  background: #ffffff4d;
   border-radius: 20px;
   padding: 0.3rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -300,10 +299,11 @@ function handleLogoError(event) {
   font-size: 1.2rem;
   color: #ffffff;
   outline: none;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
 .search-input::placeholder {
-  color: #eee;
+  color: #eeeeee;
 }
 
 .clear-btn {
@@ -315,6 +315,7 @@ function handleLogoError(event) {
   display: flex;
   align-items: center;
   padding: 0;
+  color: #ffffff;
 }
 
 .search-btn {
@@ -333,24 +334,35 @@ function handleLogoError(event) {
 }
 
 .search-btn:hover {
-  background: #ffffff3a;
+  background: #00000033;
 }
 
+/* === Animated Gradient Background from gradient-animator.com === */
 .home-container {
   min-height: 95vh;
-  /* === 最终确认的更深邃柔和渐变 === */
-  background-image: linear-gradient(135deg, #6a5acd 0%, #9370db 100%);
-  /* ================================= */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: linear-gradient(315deg, #7f5a83, #0d324d);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
   background-attachment: fixed;
   display: flex;
   flex-direction: column;
-  /* padding: 1rem 1rem; */
   position: relative;
-  padding-top: 50px; 
+  padding-top: 50px;
 }
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+/* ============================================================= */
+
 
 .home-container::before {
   content: '';
@@ -359,7 +371,7 @@ function handleLogoError(event) {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.1); 
+  background: rgba(0, 0, 0, 0.15); /* Slightly darken the overlay for better text contrast */
   z-index: 1;
 }
 
@@ -619,7 +631,7 @@ function handleLogoError(event) {
   color: #ffffff;
   font-size: 14px;
   margin: 0;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); 
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 .footer-link {
   color: #ffffff;
@@ -679,12 +691,12 @@ function handleLogoError(event) {
     flex-direction: column;
     gap: 1rem;
   }
-  
+
   .ad-space {
     width: 100%;
     height: 100px;
   }
-  
+
   .ad-placeholder {
     height: 80px;
   }
@@ -694,15 +706,15 @@ function handleLogoError(event) {
   .home-container {
     padding-top: 80px;
   }
-  
+
   .content-wrapper {
     gap: 0.5rem;
   }
-  
+
   .ad-space {
     height: 60px;
   }
-  
+
   .ad-placeholder {
     height: 50px;
     font-size: 12px;
