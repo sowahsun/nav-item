@@ -246,6 +246,24 @@ function handleLogoError(event) {
 </script>
 
 <style scoped>
+/* === 动态背景动画逻辑 (源自 https://www.gradient-animator.com/ 的默认演示方案) === */
+@-webkit-keyframes gradient {
+	0%{background-position:0% 50%}
+	50%{background-position:100% 50%}
+	100%{background-position:0% 50%}
+}
+@-moz-keyframes gradient {
+	0%{background-position:0% 50%}
+	50%{background-position:100% 50%}
+	100%{background-position:0% 50%}
+}
+@keyframes gradient {
+	0%{background-position:0% 50%}
+	50%{background-position:100% 50%}
+	100%{background-position:0% 50%}
+}
+/* =================================================================================== */
+
 .menu-bar-fixed {
   position: fixed;
   top: .6rem;
@@ -303,7 +321,7 @@ function handleLogoError(event) {
 }
 
 .search-input::placeholder {
-  color: #eeeeee;
+  color: #eee;
 }
 
 .clear-btn {
@@ -311,11 +329,11 @@ function handleLogoError(event) {
   border: none;
   outline: none;
   cursor: pointer;
+  padding: 0;
+  color: #ffffff;
   margin-right: 0.2rem;
   display: flex;
   align-items: center;
-  padding: 0;
-  color: #ffffff;
 }
 
 .search-btn {
@@ -337,29 +355,32 @@ function handleLogoError(event) {
   background: #00000033;
 }
 
-/* === Animated Gradient Background from gradient-animator.com === */
+/* === Animated Gradient Background === */
 .home-container {
   min-height: 95vh;
-  background: linear-gradient(315deg, #7f5a83, #0d324d);
+  
+  /* === 最终确认的更深邃柔和多彩动态渐变（已调暗 20%） === */
+  background: linear-gradient(
+    -45deg, 
+    #cc4c57, /* 柔和红（已调暗） */
+    #cca15b, /* 亮黄（已调暗） */
+    #819dc7, /* 柔和蓝（已调暗） */
+    #9cc0cc, /* 浅青色（已调暗） */
+    #8673cc, /* 浅紫（已调暗） */
+    #92ccb7  /* 浅绿（已调暗） */
+  );
   background-size: 400% 400%;
-  animation: gradient 15s ease infinite;
+  
+  /* === 应用 120 秒的柔和动画（Animation Logic/Speed） === */
+  -webkit-animation: gradient 120s ease infinite;
+  -moz-animation: gradient 120s ease infinite;
+  animation: gradient 120s ease infinite;
+  
   background-attachment: fixed;
   display: flex;
   flex-direction: column;
   position: relative;
   padding-top: 50px;
-}
-
-@keyframes gradient {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
 }
 /* ============================================================= */
 
@@ -431,7 +452,6 @@ function handleLogoError(event) {
   border-radius: 12px;
   box-shadow: 0 0 12px rgba(0,0,0,0.12);
   background: #fff;
-  object-fit: contain;
   margin: 0 auto;
 }
 
