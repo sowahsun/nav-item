@@ -1,5 +1,5 @@
 #!/bin/bash
-# Nav-item 部署脚本 for ARM64 软路由
+# Nav-item 部署脚本 for ARM64 软路由 (已修复权限问题)
 
 # ----------------------------------------------------
 # 1. 变量定义 (方便日后修改)
@@ -26,6 +26,7 @@ echo "Deploying $CONTAINER_NAME with persistence and restart policy..."
 docker run -d \
   --name $CONTAINER_NAME \
   --restart unless-stopped \
+  --user 0:0 \
   -p $HOST_PORT:$CONTAINER_PORT \
   -v $DATA_BASE_DIR/database:/app/database \
   -v $DATA_BASE_DIR/uploads:/app/uploads \
