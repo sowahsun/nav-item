@@ -372,8 +372,8 @@ function handleLogoError(event) {
   background-size: 400% 400%;
   
   /* === 应用 30 秒的柔和动画（Animation Logic/Speed） === */
-  -webkit-animation: gradient 30s ease infinite;
-  -moz-animation: gradient 30s ease infinite;
+  -webkit-animation: gradient 15s ease infinite;
+  -moz-animation: gradient 15s ease infinite;
   animation: gradient 120s ease infinite;
   
   background-attachment: fixed;
@@ -769,3 +769,4 @@ function handleLogoError(event) {
   }
 }
 </style>
+
