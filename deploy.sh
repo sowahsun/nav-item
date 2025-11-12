@@ -8,19 +8,20 @@ CONTAINER_NAME="nav-item"
 IMAGE_NAME="ghcr.io/sowahsun/nav-item:latest"
 HOST_PORT="3001"
 CONTAINER_PORT="3000"
-DATA_BASE_DIR="/mnt/mmc1-4/docker_data/nav-item"
-ADMIN_USER="admin"
-ADMIN_PASS="000000" # 注意：请在登录管理面板后立即修改此密码！
+DATA_BASE_DIR="/mnt/mmc1-4/docker_data/nav-item" # 数据持久化目录
+ADMIN_USER="admin"                               # 默认管理员账号
+ADMIN_PASS="000000"                              # 默认初始密码（有配置文件时会被忽略）
 
 # ----------------------------------------------------
 # 2. 停止并删除旧容器
 # ----------------------------------------------------
 echo "Stopping and removing existing container: $CONTAINER_NAME..."
+# 使用 2>/dev/null 隐藏找不到容器时的错误信息
 docker stop $CONTAINER_NAME 2>/dev/null
 docker rm $CONTAINER_NAME 2>/dev/null
 
 # ----------------------------------------------------
-# 3. 运行新容器 (多架构镜像，自动选择 ARM64)
+# 3. 运行新容器 (包含权限修复参数 --user 0:0)
 # ----------------------------------------------------
 echo "Deploying $CONTAINER_NAME with persistence and restart policy..."
 docker run -d \
@@ -38,6 +39,5 @@ docker run -d \
 echo "Deployment complete. Access at http://[Your_Router_IP]:$HOST_PORT/admin"
 
 # ----------------------------------------------------
-# 注意：部署成功后，请使用当前生效的密码登录管理后台，
-# 并将其修改为一个复杂的强密码。
+# 总结：此脚本通过 --user 0:0 解决了在软路由上无法写入文件的问题。
 # ----------------------------------------------------
